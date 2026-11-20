@@ -237,7 +237,7 @@ img{max-width:100%}
 .mini div{white-space:pre-wrap}
 .mini .in{padding-left:18px}
 .mini mark{background:none;color:#D2343D;font-weight:600}
-.scard footer{display:flex;gap:8px;padding:12px 16px 16px}
+.scard footer{display:flex;flex-wrap:wrap;gap:8px;padding:12px 16px 16px}
 .rules{margin:28px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px 28px;color:var(--ink-2);font-size:14px;padding:0;list-style:none}
 .rules li{padding-left:18px;position:relative}
 .rules li::before{content:"";position:absolute;left:0;top:.72em;width:7px;height:7px;border-radius:50%;border:1.5px solid var(--ink-3)}
@@ -247,6 +247,36 @@ footer.f a{color:var(--ink-2)}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);opacity:0;pointer-events:none;background:var(--ink);color:var(--surface);padding:10px 18px;border-radius:12px;font-size:14px;transition:opacity .2s,transform .2s;z-index:20;max-width:calc(100% - 32px)}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.stem-block{padding:20px 24px 16px 30px;background:var(--sunk);border-top:2px solid var(--ink)}
+.stem-block:first-child{border-top:0}
+.sth{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.stno{font-weight:600;font-size:13.5px;padding:2px 11px;border-radius:999px;background:var(--ink);color:var(--surface)}
+.stem-block.bad .stno{background:var(--red)}
+.stem-block.isdone .stno{background:var(--green);color:#fff}
+.stem-text{font-size:15.5px;line-height:1.75;overflow-wrap:anywhere}
+.done{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--ink-2);cursor:pointer;margin-right:4px}
+.done input{width:16px;height:16px;accent-color:var(--green);cursor:pointer}
+button.pill{cursor:pointer;font-size:13.5px}
+.hint .btn{margin-top:10px}
+dialog.guide-d{max-width:700px;width:calc(100% - 32px);max-height:calc(100% - 48px);padding:0;border:1px solid var(--line);border-radius:18px;background:var(--surface);color:var(--ink)}
+dialog.guide-d::backdrop{background:rgba(14,19,34,.55)}
+.gd-h{display:flex;align-items:flex-start;gap:12px;padding:22px 24px 8px;position:sticky;top:0;background:var(--surface);z-index:1}
+.gd-h h2{margin:0;font-size:19px;font-weight:600;flex:1;line-height:1.4}
+.gd-b{padding:0 24px 24px;font-size:14.5px}
+.gd-b>p{margin:0 0 6px;color:var(--ink-2)}
+.gd-b h3{margin:22px 0 12px;font-size:14.5px;font-weight:600}
+.gsteps{list-style:none;margin:0;padding:0;counter-reset:g;display:flex;flex-direction:column;gap:14px}
+.gsteps li{counter-increment:g;display:grid;grid-template-columns:30px 1fr;gap:12px}
+.gsteps li::before{content:counter(g);display:grid;place-items:center;width:28px;height:28px;border-radius:50%;border:1.5px solid var(--ink);font-size:13px;font-weight:600}
+.gsteps.inget li::before{background:var(--bubble);color:var(--bubble-ink);border-color:var(--bubble)}
+.gsteps b{font-weight:600}
+.gsteps p{margin:2px 0 0;color:var(--ink-2)}
+.gsteps code{font-family:inherit;padding:1px 6px;border-radius:6px;background:var(--sunk);color:var(--ink);font-size:13.5px}
+.gflow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:14px 0 2px;font-size:13px}
+.gflow span{padding:5px 10px;border:1px solid var(--line-2);border-radius:9px;background:var(--sunk)}
+.gflow svg{color:var(--ink-3);flex:none}
+.gtips{margin:0;padding:14px 16px 14px 34px;background:var(--sunk);border-radius:12px;color:var(--ink-2);font-size:13.5px}
+.gtips li+li{margin-top:5px}
 @media (max-width:560px){
   .wrap{padding:0 14px}
   .q{padding:18px 16px 18px 22px}
@@ -383,6 +413,33 @@ footer.f a{color:var(--ink-2)}
   </div>
 </section>
 <footer class="f"><div class="wrap fwrap"><span class="mark geta-badge"><img class="logo" src="https://lh3.googleusercontent.com/d/1oGSDEozjru4s0RkVIBlP_tG-IXcVUH6b" alt="getA" referrerpolicy="no-referrer"><b class="logo-fb">getA</b></span><span>คณะทันตแพทยศาสตร์ มหาวิทยาลัยนเรศวร ไฟล์ที่ได้ใช้รูปแบบเดียวกับ Template นำเข้าของ getA ทั้ง 7 ประเภท ประมวลผลในเบราว์เซอร์ทั้งหมด</span></div></footer>
+<dialog class="guide-d" id="scnGuide" aria-labelledby="gdTitle">
+  <div class="gd-h"><h2 id="gdTitle">นำเข้าข้อสอบแบบ Scenario ทีละขั้น</h2><button class="icon" data-act="gclose" aria-label="ปิด"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+  <div class="gd-b">
+    <p>getA ยังนำเข้า scenario ทั้งชุดในครั้งเดียวไม่ได้ แอปนี้จึงเตรียมของให้ครบ เหลือแค่สร้าง scenario แล้ว import ไฟล์ที่ตรงกันทีละ stem ไม่ต้องพิมพ์ข้อสอบใหม่</p>
+    <div class="gflow" aria-hidden="true"><span>Word ไฟล์เดียว</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-5-5 5 5-5 5"/></svg><span>แอปนี้</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-5-5 5 5-5 5"/></svg><span>.zip ไฟล์ละ stem</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-5-5 5 5-5 5"/></svg><span>getA ทีละ scenario</span></div>
+    <h3>เตรียมในแอปนี้ (ทำครั้งเดียว)</h3>
+    <ol class="gsteps">
+      <li><div><b>ทำไฟล์ Word ตามแบบ</b><p>ขึ้นต้นแต่ละ stem ด้วย <code>Stem 1:</code> ตามด้วยข้อความโจทย์ ใส่รูปหรือตารางได้ จากนั้นพิมพ์ lead-in เป็นข้อ 1. 2. 3. พร้อมตัวเลือก a–e และทำเฉลยด้วยตัวหนา สีแดง หรือไฮไลต์ เลขข้อจะนับต่อทั้งไฟล์หรือเริ่ม 1 ใหม่ทุก stem ก็ได้ ดาวน์โหลดไฟล์ตัวอย่างได้ที่ท้ายหน้า</p></div></li>
+      <li><div><b>เลือกประเภท Scenario แล้วอัปโหลด</b><p>ตรวจว่าทุก stem มี lead-in ครบและมีเฉลยทุกข้อ stem ที่มีปัญหาจะขึ้นป้ายสีแดง กด “ต้องแก้” เพื่อดูเฉพาะจุดนั้น</p></div></li>
+      <li><div><b>ดาวน์โหลดชุด Scenario แล้วแตกไฟล์ .zip</b><p>จะได้ <code>00_รายการ_Stem.docx</code> ที่มีข้อความ stem ทุกข้อ กับโฟลเดอร์ <code>ไฟล์นำเข้า</code> ที่มีไฟล์ S001, S002 … ไฟล์ละหนึ่ง stem</p></div></li>
+    </ol>
+    <h3>ทำใน getA (วนทีละ stem)</h3>
+    <ol class="gsteps inget" style="counter-reset:g 3">
+      <li><div><b>สร้าง Scenario ใหม่</b><p>ตั้งชื่อตามเลข เช่น Stem 001 แล้ววางข้อความ stem ที่ได้จากปุ่ม “คัดลอก stem” ในแอป ถ้า stem มีรูปหรือตาราง ให้ก๊อปจากไฟล์รายการ Stem แทน</p></div></li>
+      <li><div><b>Import to scenario</b><p>เลือก Scenario ที่เพิ่งสร้าง แล้วเลือกไฟล์ <code>S001_….docx</code> ที่เลขตรงกัน lead-in ทั้งหมดของ stem นั้นจะเข้าไปพร้อมเฉลย</p></div></li>
+      <li><div><b>ติ๊ก “ทำใน getA แล้ว” แล้วไป stem ถัดไป</b><p>แอปจำความคืบหน้าไว้ในเบราว์เซอร์นี้ ปิดแล้วกลับมาอัปโหลดไฟล์เดิม ติ๊กเดิมยังอยู่</p></div></li>
+    </ol>
+    <h3>เคล็ดลับให้ไม่หลง</h3>
+    <ul class="gtips">
+      <li>เปิดแอปนี้กับ getA คนละครึ่งจอ จะสลับไปมาได้เร็ว</li>
+      <li>ตั้งชื่อ Scenario ให้เลขตรงกับไฟล์ทุกครั้ง ทุกข้อมีแท็ก Stem001, Stem002 … ติดไปแล้ว ใช้ตรวจย้อนได้</li>
+      <li>ทุก 10 stem เปิดดูใน getA สักครั้งว่าข้อย่อยเข้าถูก Scenario</li>
+      <li>ข้อความใน stem ไม่ควรขึ้นต้นบรรทัดด้วยเลขข้อ เช่น 1. หรือ 1) เพราะแอปจะเข้าใจว่าเป็น lead-in</li>
+      <li>ชื่อเมนูใน getA อาจต่างเล็กน้อยตามเวอร์ชัน ดูคู่มือของ getA ประกอบ</li>
+    </ul>
+  </div>
+</dialog>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
@@ -405,11 +462,12 @@ const TYPES=[
   {k:'ESSAY',th:'อัตนัย / เติมคำ',hint:'ใส่คำตอบที่ยอมรับในบรรทัด “ตอบ: ...” ใต้คำถาม คำที่ใช้แทนกันได้คั่นด้วย / ถ้าไม่ใส่จะเป็นข้อเขียนตรวจเอง'},
   {k:'QUESTIONSET',th:'ชุดคำถาม',hint:'คำถามหลักหนึ่งข้อ มีคำถามย่อย ก ข ค ใต้ข้อ ต่อท้ายคำถามย่อยด้วย “ตอบ: ...” ได้'},
   {k:'DRAWING',th:'วาดภาพ',hint:'คำถามให้นักเรียนวาดภาพ ใส่คีย์เวิร์ดช่วยตรวจในบรรทัด “ตอบ: ...” ได้ แต่ไม่บังคับ'},
+  {k:'SCENARIO',th:'Scenario (stem + lead-in)',hint:'แต่ละ stem ขึ้นต้นด้วย “Stem 1:” ตามด้วยข้อความโจทย์ แล้วตามด้วย lead-in ที่มีตัวเลือกและเฉลยแบบปรนัย แอปจะแยกเป็นไฟล์ #MCHOICE ไฟล์ละ stem พร้อมรายการ stem ไว้สร้าง scenario ใน getA'},
   {k:'AUTO',th:'ผสมหลายประเภทในไฟล์เดียว',hint:'ระบบเดาประเภททีละข้อ ปรนัย หลายคำตอบ ถูก-ผิด ชุดคำถาม หรืออัตนัย เปลี่ยนเองได้ในแต่ละข้อ แล้วได้ไฟล์แยกตามประเภทใน .zip เดียว'}
 ];
 const TNAME=Object.fromEntries(TYPES.map(t=>[t.k,t.th]));
 
-const S={type:'MCHOICE',mode:'file',files:[],qs:[],ignored:[],view:'check',only:false,
+const S={type:'MCHOICE',mode:'file',files:[],qs:[],stems:[],done:new Set(),ignored:[],view:'check',only:false,
   opts:{marks:{b:true,color:true,hl:true,u:true},score:'',tag:'',essayType:'auto',tfMode:'separate',tfHeading:'ข้อความต่อไปนี้ถูกหรือผิด'}};
 
 /* ---------- segment utils ---------- */
@@ -685,6 +743,10 @@ const TF_TAIL=new RegExp(`${WS}*[(（\\[]${WS}*(${TFW})${WS}*[)）\\]]${WS}*$`,'
 const TF_HEAD=new RegExp(`^${WS}*[(（\\[]${WS}*(${TFW})${WS}*[)）\\]]${WS}*`,'i');
 const PAIR_RE=new RegExp(`([0-9๐-๙]{1,3})${WS}*[.)\\-:：]?${WS}*[(（]?${WS}*(ถูก|ผิด|[ก-ฮ]|[a-hA-H]|[0-9๐-๙]{1,2})${WS}*[)）]?(?=[\\s\\u00a0,，;]|$)`,'g');
 const STAR_HEAD=new RegExp(`^${WS}*[*✓✔]${WS}*`);
+const STEM_KW='stem|scenario|case|สถานการณ์|กรณีศึกษา|โจทย์สถานการณ์';
+const STEM_N=new RegExp(`^${WS}*(?:${STEM_KW})${WS}*(?:ที่)?${WS}*([0-9๐-๙]{1,3})${WS}*(?:[:：.)\\-–]${WS}*|${WS}+|$)`,'i');
+const STEM_0=new RegExp(`^${WS}*(?:${STEM_KW})${WS}*[:：]${WS}*`,'i');
+const LEAD_RE=new RegExp(`^${WS}*(?:lead${WS}*-?${WS}*in|คำถามย่อย|ข้อย่อย)${WS}*(?:ที่)?${WS}*([0-9๐-๙]{1,2})?${WS}*[:：.)\\-–]${WS}*`,'i');
 
 function tfVal(s){
   s=String(s||'').replace(/[()（）\[\]]/g,'').trim();
@@ -746,12 +808,12 @@ function parsePairs(t,map){let m,n=0;PAIR_RE.lastIndex=0;while((m=PAIR_RE.exec(t
 function pairCount(t){return parsePairs(t,{})}
 
 function build(L){
-  const qs=[],ignored=[],keyMap={};let q=null,key=false;
+  const qs=[],ignored=[],keyMap={},stems=[],scn=S.type==='SCENARIO';let q=null,key=false,stem=null;
   const txt=l=>l.table?'':segText(l.segs);
   const isFirstChoice=l=>{if(!l||l.table)return false;let t=txt(l);const ps=STAR_HEAD.exec(t);if(ps)t=t.slice(ps[0].length);const m=C_RE.exec(t);return !!m&&labKind(m[2])!=='dig'&&labIdx(m[2])===0};
   const nextSig=i=>{for(let j=i+1;j<L.length;j++){if(L[j].boundary)return null;if(L[j].table||txt(L[j]).trim())return L[j]}return null};
   const attach=line=>{if(q.choices.length)q.choices[q.choices.length-1].extras.push(line);else q.extras.push(line)};
-  const newQ=(line,num,segs)=>{q={id:++UID,num,segs:[],extras:[],choices:[],answers:[],expl:[],tf:null,indent:line.indent||0,auto:line.auto,math:!!line.math,keyAns:null,sel:null,tfSel:{},order:null,kw:null,itemKw:{},typeOv:null,essayType:null};qs.push(q);setStem(q,segs)};
+  const newQ=(line,num,segs)=>{q={id:++UID,num,segs:[],extras:[],choices:[],answers:[],expl:[],tf:null,indent:line.indent||0,auto:line.auto,math:!!line.math,keyAns:null,sel:null,tfSel:{},order:null,kw:null,itemKw:{},typeOv:null,essayType:null,stem:stem?stem.id:null};if(stem)stem.n++;qs.push(q);setStem(q,segs)};
   const classifyNum=(line,N)=>{
     if(!q)return'question';
     if(line.auto&&q.auto&&line.auto.numId===q.auto.numId&&line.auto.ilvl===q.auto.ilvl)return'question';
@@ -762,13 +824,19 @@ function build(L){
   };
   for(let i=0;i<L.length;i++){
     const line=L[i];
-    if(line.boundary){q=null;key=false;continue}
-    if(line.table){if(q)attach(line);else ignored.push('[ตาราง]');continue}
+    if(line.boundary){q=null;key=false;stem=null;continue}
+    if(line.table){if(q)attach(line);else if(scn&&stem)stem.extras.push(line);else ignored.push('[ตาราง]');continue}
     const raw=segText(line.segs),t=raw.trim(),hasImg=line.segs.some(s=>s.img);
-    if(!t){if(hasImg&&q)attach(line);continue}
+    if(!t){if(hasImg){if(q)attach(line);else if(scn&&stem)stem.extras.push(line)}continue}
     if(key){parsePairs(t,keyMap);continue}
     if(KEY_RE.test(t)){key=true;continue}
     if(/^[\s\u00a0]*(เฉลย|answer|key)/i.test(t)&&pairCount(t)>=2){key=true;parsePairs(t,keyMap);continue}
+    if(scn){
+      const sm=STEM_N.exec(raw)||STEM_0.exec(raw);
+      if(sm){stem={id:++UID,num:sm[1]!=null?+asc(sm[1]):null,segs:trimSegs(sliceSegs(line.segs,sm[0].length)),extras:[],n:0};stems.push(stem);q=null;continue}
+      const lm=LEAD_RE.exec(raw);
+      if(lm){const pieces=splitInline(line.segs,lm[0].length,'question');newQ(line,lm[1]!=null?+asc(lm[1]):null,pieces[0].segs);pieces.slice(1).forEach(p=>q.choices.push(makeChoice(p.segs,p.label,false)));continue}
+    }
     if(SECTION_RE.test(t)){q=null;ignored.push(t);continue}
     let m;
     if(q&&(m=EXPL_RE.exec(t))){q.expl.push(m[1].trim());continue}
@@ -792,11 +860,13 @@ function build(L){
       if(q&&!q.choices.length)q.extras.push(line);
       else if(isFirstChoice(nx))newQ(line,null,line.segs);
       else if(q)attach(line);
+      else if(scn&&stem)stem.extras.push(line);
       else ignored.push(t);
     }
   }
   for(const x of qs)if(x.num!=null&&keyMap[x.num]!=null)x.keyAns=keyMap[x.num];
-  return{qs,ignored};
+  stems.forEach((st,i)=>st.idx=i+1);
+  return{qs,ignored,stems};
 }
 
 /* ---------- answer resolution ---------- */
@@ -873,7 +943,7 @@ function autoType(q){
   if(sel(q).size>1)return'MCHECK';
   return'MCHOICE';
 }
-const eType=q=>S.type==='AUTO'?(q.typeOv||autoType(q)):S.type;
+const eType=q=>S.type==='AUTO'?(q.typeOv||autoType(q)):S.type==='SCENARIO'?'MCHOICE':S.type;
 const qKw=q=>q.kw??q.answers.map(a=>a.text).join('\n');
 const itemKw=(q,i)=>q.itemKw[i]??[...q.choices[i].ans,...q.answers.filter(a=>a.at===i+1).map(a=>a.text)].join('\n');
 const kwSets=str=>String(str||'').split('\n').map(l=>l.trim()).filter(Boolean).map(l=>l.split(/[\s\u00a0]*(?:\/|\||::|[\s\u00a0]หรือ[\s\u00a0])[\s\u00a0]*/).map(x=>x.trim()).filter(Boolean).join('::')).filter(Boolean);
@@ -885,6 +955,7 @@ function essayTypeOf(sets,ov){
 }
 function issues(q,t){
   const I=[],err=x=>I.push({lvl:'err',t:x}),warn=x=>I.push({lvl:'warn',t:x});
+  if(S.type==='SCENARIO'&&!q.stem)err('ไม่อยู่ใต้ Stem ใด จะไม่ถูกส่งออก');
   const stemEmpty=!segText(q.segs).trim()&&!q.segs.some(s=>s.img)&&!q.extras.length;
   if(stemEmpty&&!(t==='TF'&&tfStatements(q).grouped))err('ไม่มีข้อความคำถาม');
   if(t==='MCHOICE'||t==='MCHECK'){
@@ -901,8 +972,8 @@ function issues(q,t){
 }
 
 /* ---------- getA entries ---------- */
-function buildEntries(type,qs){
-  const E=[],score=S.opts.score.trim(),tag=S.opts.tag.trim();
+function buildEntries(type,qs,extraTag){
+  const E=[],score=S.opts.score.trim(),tag=[S.opts.tag.trim(),extraTag].filter(Boolean).join('::');
   const stem=q=>({m:'$Q',segs:q.segs,extras:q.extras,keepB:true,gap:true});
   const tail=(q,withScore)=>{if(withScore&&score)E.push({m:'$Score',text:score});if(q.expl.length)E.push({m:'$Additional',text:q.expl.join(' ')});if(tag)E.push({m:'$Tag',text:tag})};
   if(type==='TF'){
@@ -1024,6 +1095,7 @@ function groups(){
   return TYPES.map(t=>t.k).filter(k=>g[k]).map(k=>[k,g[k]]);
 }
 async function doExport(){
+  if(S.type==='SCENARIO')return doExportScenario();
   const G=groups();if(!G.length)return;
   const btn=$('#dl');btn.disabled=true;$('#dlLabel').textContent='กำลังสร้างไฟล์…';
   try{
@@ -1031,6 +1103,58 @@ async function doExport(){
     else{const z=new JSZip();for(const [k,qs] of G)z.file(`${baseName()}_getA_${k}.docx`,await makeDocx(k,buildEntries(k,qs)));await saveBlob(`${baseName()}_getA.zip`,await z.generateAsync({type:'blob'}))}
   }catch(e){console.error(e);toast('สร้างไฟล์ไม่สำเร็จ '+e.message)}
   finally{btn.disabled=false;renderBar()}
+}
+
+/* ---------- scenario ---------- */
+const pad3=n=>String(n).padStart(3,'0');
+const stemQs=st=>S.qs.filter(q=>q.stem===st.id);
+const stemTag=st=>'Stem'+pad3(st.idx);
+function stemPlain(st){return[segText(st.segs),...st.extras.map(l=>l.table?l.table.rows.map(r=>r.join('\t')).join('\n'):segText(l.segs))].map(x=>x.trim()).filter(Boolean).join('\n')}
+function stemFile(st){const t=stemPlain(st).replace(/[\\/:*?"<>|\u0000-\u001f]+/g,' ').replace(/[\s\u00a0]+/g,'_').replace(/^_+|_+$/g,'').slice(0,28).replace(/_+$/,'');return`S${pad3(st.idx)}${t?'_'+t:''}.docx`}
+const stemHasImg=st=>st.segs.some(x=>x.img)||st.extras.some(l=>l.table||l.segs.some(x=>x.img));
+function stemIssues(st){const I=[];if(!stemQs(st).length)I.push({lvl:'err',t:'Stem นี้ยังไม่มี lead-in'});if(!stemPlain(st)&&!stemHasImg(st))I.push({lvl:'err',t:'ไม่มีข้อความ stem'});return I}
+const stemBad=st=>stemIssues(st).some(x=>x.lvl==='err')||stemQs(st).some(isBad);
+const doneKey=()=>'geta-scn:'+baseName();
+function loadDone(){S.done=new Set();try{JSON.parse(localStorage.getItem(doneKey())||'[]').forEach(x=>S.done.add(x))}catch(e){}}
+function saveDone(){try{localStorage.setItem(doneKey(),JSON.stringify([...S.done]))}catch(e){}}
+const doneCount=()=>S.stems.filter(st=>S.done.has(st.idx)).length;
+async function copyText(t){
+  try{await navigator.clipboard.writeText(t);return true}
+  catch(e){const ta=document.createElement('textarea');ta.value=t;ta.setAttribute('readonly','');ta.style.cssText='position:fixed;top:0;left:0;opacity:0';document.body.appendChild(ta);ta.select();let ok=false;try{ok=document.execCommand('copy')}catch(_){}ta.remove();return ok}
+}
+async function stemListDocx(){
+  const ctx={media:[],rels:[],docPr:1,cache:new Map(),dollars:0};
+  const B=t=>`<w:r><w:rPr><w:b/><w:bCs/></w:rPr><w:t xml:space="preserve">${xe(t)}</w:t></w:r>`,Rn=t=>`<w:r><w:t xml:space="preserve">${xe(t)}</w:t></w:r>`;
+  let body=P(`<w:r><w:rPr><w:b/><w:bCs/><w:sz w:val="32"/><w:szCs w:val="32"/></w:rPr><w:t xml:space="preserve">${xe('รายการ Stem สำหรับสร้าง Scenario ใน getA')}</w:t></w:r>`)+P(Rn(`${baseName()}   ทั้งหมด ${S.stems.length} stem   ${S.qs.filter(q=>q.stem).length} lead-in`))+P('');
+  for(const st of S.stems){
+    body+=P(B(`Stem ${pad3(st.idx)}`)+Rn(`   ${stemQs(st).length} lead-in   ไฟล์นำเข้า: ${stemFile(st)}`));
+    if(segText(st.segs).trim()||st.segs.some(x=>x.img))body+=await lineXML({segs:st.segs},true,ctx);
+    for(const l of st.extras)body+=await lineXML(l,true,ctx);
+    body+=P(Rn('☐ สร้าง Scenario แล้ว      ☐ Import ไฟล์แล้ว'))+P('');
+  }
+  return packDocx(body,ctx);
+}
+function readme(){
+  return['ชุดไฟล์ Scenario สำหรับนำเข้า getA',`ไฟล์ต้นฉบับ: ${baseName()}   ${S.stems.length} stem`,'',
+  'ในชุดนี้มี','- 00_รายการ_Stem.docx  ข้อความ stem ทุกข้อ (รวมรูปและตาราง) ไว้ก๊อปไปวางตอนสร้าง Scenario','- โฟลเดอร์ ไฟล์นำเข้า  ไฟล์ #MCHOICE ไฟล์ละ 1 stem ตั้งชื่อ S001, S002 ... ตามลำดับ','',
+  'ทำใน getA ทีละ stem','1. สร้าง Scenario ใหม่ ตั้งชื่อ เช่น Stem 001 แล้ววางข้อความ stem จากไฟล์รายการ Stem','2. ใช้คำสั่ง Import to scenario เลือก Scenario ที่เพิ่งสร้าง แล้วเลือกไฟล์ S001_....docx','3. ติ๊กช่องในไฟล์รายการ Stem หรือในแอป แล้วทำ stem ถัดไป','',
+  'ทุกข้อมีแท็ก Stem001, Stem002 ... ติดไปแล้ว ใช้ค้นหาหรือตรวจย้อนได้','ทุก 10 stem แนะนำให้เปิดดูใน getA ว่าข้อย่อยเข้าถูก Scenario'].join('\r\n');
+}
+async function doExportScenario(){
+  const btn=$('#dl');btn.disabled=true;$('#dlLabel').textContent='กำลังสร้างไฟล์…';
+  try{
+    const z=new JSZip();
+    z.file('00_อ่านก่อน.txt','\ufeff'+readme());
+    z.file('00_รายการ_Stem.docx',await stemListDocx());
+    for(const st of S.stems){const qs=stemQs(st);if(qs.length)z.file('ไฟล์นำเข้า/'+stemFile(st),await makeDocx('MCHOICE',buildEntries('MCHOICE',qs,stemTag(st))))}
+    await saveBlob(`${baseName()}_getA_Scenario.zip`,await z.generateAsync({type:'blob'}));
+    const orph=S.qs.filter(q=>!q.stem).length;if(orph)setTimeout(()=>toast(`ข้าม ${orph} ข้อที่ไม่อยู่ใต้ Stem`),1500);
+  }catch(e){console.error(e);toast('สร้างไฟล์ไม่สำเร็จ '+e.message)}
+  finally{btn.disabled=false;renderBar()}
+}
+function stemHTML(st){
+  const qs=stemQs(st),I=stemIssues(st),bad=stemBad(st),done=S.done.has(st.idx);
+  return`<section class="stem-block${bad?' bad':''}${done?' isdone':''}" id="st${st.id}" data-s="${st.id}"><div class="sth"><span class="stno">Stem ${pad3(st.idx)}</span><span class="tag">${qs.length} lead-in</span><span class="grow"></span><label class="done"><input type="checkbox" data-act="stdone"${done?' checked':''}>ทำใน getA แล้ว</label><button class="btn ghost sm" data-act="stcopy">คัดลอก stem</button><button class="btn ghost sm" data-act="stdl" title="${esc(stemFile(st))}">ไฟล์ S${pad3(st.idx)}</button></div><div class="stem-text">${segsHTML(st.segs)}${extrasHTML(st.extras,true)}</div>${I.length?`<ul class="issues">${I.map(x=>`<li class="${x.lvl}">${esc(x.t)}</li>`).join('')}</ul>`:''}</section>`;
 }
 
 /* ---------- rendering ---------- */
@@ -1081,8 +1205,9 @@ function bodyHTML(q,t){
 function cardHTML(q,n){
   const t=eType(q),I=issues(q,t),bad=I.some(x=>x.lvl==='err');
   const tfStmt=t==='TF'&&!tfStatements(q).grouped;
-  let h=`<article class="q${bad?' bad':''}" id="q${q.id}" data-q="${q.id}"><div class="qh"><span class="qno">ข้อ ${q.num??n}</span>`;
-  if(S.type==='AUTO')h+=`<select class="tsel" data-act="qtype" aria-label="ประเภทของข้อนี้">${TYPES.filter(x=>x.k!=='AUTO').map(x=>`<option value="${x.k}"${x.k===t?' selected':''}>${x.th}</option>`).join('')}</select>`;
+  const lab=S.type==='SCENARIO'&&q.stem?`Lead-in ${S.qs.filter(x=>x.stem===q.stem).indexOf(q)+1}`:`ข้อ ${q.num??n}`;
+  let h=`<article class="q${bad?' bad':''}" id="q${q.id}" data-q="${q.id}"><div class="qh"><span class="qno">${lab}</span>`;
+  if(S.type==='AUTO')h+=`<select class="tsel" data-act="qtype" aria-label="ประเภทของข้อนี้">${TYPES.filter(x=>!['AUTO','SCENARIO'].includes(x.k)).map(x=>`<option value="${x.k}"${x.k===t?' selected':''}>${x.th}</option>`).join('')}</select>`;
   h+=`<span class="grow"></span><button class="icon" data-act="del" aria-label="ลบข้อ ${q.num??n}" title="ลบข้อนี้">${ICON_X}</button></div>`;
   h+=`<div class="stem${tfStmt?' statement':''}">${segsHTML(q.segs)}${extrasHTML(q.extras,true)}</div>`;
   h+=bodyHTML(q,t);
@@ -1094,23 +1219,30 @@ const isBad=q=>issues(q,eType(q)).some(x=>x.lvl==='err');
 function emptyHTML(){
   return`<div class="empty"><svg width="72" height="56" viewBox="0 0 72 56" aria-hidden="true"><rect x="10" y="2" width="52" height="52" rx="8" fill="none" stroke="var(--line-2)" stroke-width="1.5"/><g fill="none" stroke="var(--ink-3)" stroke-width="1.5"><circle cx="24" cy="18" r="4.5"/><circle cx="36" cy="18" r="4.5"/><circle cx="48" cy="18" r="4.5"/><circle cx="24" cy="36" r="4.5"/><circle cx="48" cy="36" r="4.5"/></g><circle cx="36" cy="36" r="4.5" fill="var(--bubble)"/></svg><h3>ยังไม่มีข้อสอบ</h3><p>อัปโหลดไฟล์ Word หรือวางข้อความทางซ้าย ข้อสอบจะขึ้นที่นี่ให้ตรวจคำตอบก่อนดาวน์โหลด</p><button class="btn ghost" data-act="trysample">ลองด้วยไฟล์ตัวอย่าง</button></div>`;
 }
-function outHTML(){
-  return groups().map(([k,qs])=>{
-    const E=buildEntries(k,qs);
-    const ln=E.map(e=>{
-      const segs=e.text!=null?[{t:String(e.text)}]:e.segs;
-      let h=`<p class="ln${e.gap?' gap':''}"><b class="mk">${esc(e.m)}</b> ${segsHTML(segs.filter(s=>!s.img),e.keepB)}</p>`;
-      segs.filter(s=>s.img).forEach(s=>h+=`<p class="ln">${segsHTML([s])}</p>`);
-      (e.extras||[]).forEach(l=>h+=l.table?tableHTML(l.table):`<p class="ln">${segsHTML(l.segs,e.keepB)}</p>`);
-      return h;
-    }).join('');
-    return`<div class="out"><h3>${esc(baseName())}_getA_${k}.docx</h3><p class="ln"><b class="mk">#${k}</b></p>${ln}</div>`;
+function outBlock(title,k,E){
+  const ln=E.map(e=>{
+    const segs=e.text!=null?[{t:String(e.text)}]:e.segs;
+    let h=`<p class="ln${e.gap?' gap':''}"><b class="mk">${esc(e.m)}</b> ${segsHTML(segs.filter(s=>!s.img),e.keepB)}</p>`;
+    segs.filter(s=>s.img).forEach(s=>h+=`<p class="ln">${segsHTML([s])}</p>`);
+    (e.extras||[]).forEach(l=>h+=l.table?tableHTML(l.table):`<p class="ln">${segsHTML(l.segs,e.keepB)}</p>`);
+    return h;
   }).join('');
+  return`<div class="out"><h3>${esc(title)}</h3><p class="ln"><b class="mk">#${k}</b></p>${ln}</div>`;
+}
+function outHTML(){
+  if(S.type==='SCENARIO')return S.stems.filter(st=>stemQs(st).length).map(st=>outBlock(`Stem ${pad3(st.idx)}   ไฟล์นำเข้า/${stemFile(st)}`,'MCHOICE',buildEntries('MCHOICE',stemQs(st),stemTag(st)))).join('');
+  return groups().map(([k,qs])=>outBlock(`${baseName()}_getA_${k}.docx`,k,buildEntries(k,qs))).join('');
 }
 function render(){
   const sh=$('#sheet');
-  if(!S.qs.length){sh.innerHTML=emptyHTML();$('#ignored').innerHTML='';renderBar();return}
+  if(!S.qs.length&&!S.stems.length){sh.innerHTML=emptyHTML();$('#ignored').innerHTML='';renderBar();return}
   if(S.view==='out'){sh.innerHTML=outHTML()}
+  else if(S.type==='SCENARIO'){
+    let h='';
+    for(const st of S.stems){if(S.only&&!stemBad(st))continue;h+=stemHTML(st);stemQs(st).forEach(q=>{if(!S.only||isBad(q))h+=cardHTML(q,0)})}
+    S.qs.filter(q=>!q.stem).forEach((q,i)=>{h+=cardHTML(q,q.num??i+1)});
+    sh.innerHTML=h||'<div class="empty"><h3>ไม่มีจุดที่ต้องแก้แล้ว</h3><p>ทุก stem พร้อมนำเข้า กดดาวน์โหลดได้เลย</p></div>';
+  }
   else{
     const list=S.qs.map((q,i)=>[q,i+1]).filter(([q])=>!S.only||isBad(q));
     sh.innerHTML=list.length?list.map(([q,n])=>cardHTML(q,n)).join(''):'<div class="empty"><h3>ไม่มีข้อที่ต้องแก้แล้ว</h3><p>ทุกข้อพร้อมนำเข้า กดดาวน์โหลดได้เลย</p></div>';
@@ -1122,8 +1254,15 @@ function render(){
 function renderCard(q){
   const el=document.getElementById('q'+q.id);if(!el)return;
   const n=S.qs.indexOf(q)+1;el.outerHTML=cardHTML(q,n);
+  if(S.type==='SCENARIO'&&q.stem){const st=S.stems.find(x=>x.id===q.stem),e2=document.getElementById('st'+q.stem);if(st&&e2)e2.outerHTML=stemHTML(st)}
 }
 function renderBar(){
+  if(S.type==='SCENARIO'){
+    const ns=S.stems.length,nq=S.qs.length,bad=S.stems.filter(stemBad).length+S.qs.filter(q=>!q.stem).length,st=$('#stats');
+    if(!bad&&S.only)S.only=false;
+    st.innerHTML=(ns||nq)?`<span class="pill">${ns} stem</span><span class="pill">${nq} lead-in</span>${bad?`<button class="pill bad" data-act="only" aria-pressed="${S.only}">ต้องแก้ ${bad} จุด${S.only?' (แสดงอยู่)':''}</button>`:''}<span class="pill ok">ทำใน getA แล้ว ${doneCount()}/${ns}</span><button class="pill" data-act="guide">ขั้นตอนนำเข้า</button>`:'';
+    $('#dl').disabled=!ns;$('#dlLabel').textContent='ดาวน์โหลดชุด Scenario (.zip)';return;
+  }
   const n=S.qs.length,bad=S.qs.filter(isBad).length;
   const st=$('#stats');
   if(!n){st.innerHTML='';}
@@ -1146,7 +1285,7 @@ function linesFromSource(){
   const out=[];S.files.forEach((f,i)=>{if(i)out.push({boundary:true,segs:[]});out.push(...f.lines)});return out;
 }
 function reparse(){
-  const r=build(linesFromSource());S.qs=r.qs;S.ignored=r.ignored;S.only=false;
+  const r=build(linesFromSource());S.qs=r.qs;S.ignored=r.ignored;S.stems=r.stems;S.only=false;loadDone();
   render();
 }
 async function addFiles(list){
@@ -1168,12 +1307,13 @@ function setMode(m){
   $('#paneFile').hidden=m!=='file';$('#panePaste').hidden=m!=='paste';reparse();
 }
 function setType(k){
-  S.type=k;
+  const re=(S.type==='SCENARIO')!==(k==='SCENARIO');S.type=k;
   document.querySelectorAll('.type').forEach(b=>b.setAttribute('aria-checked',b.dataset.k===k));
   $('#hint').textContent=TYPES.find(t=>t.k===k).hint;
+  if(k==='SCENARIO')$('#hint').insertAdjacentHTML('beforeend','<br><button class="btn ghost sm" data-act="guide">ดูขั้นตอนนำเข้า Scenario</button>');
   $('#optEssay').hidden=!['ESSAY','QUESTIONSET','AUTO'].includes(k);
   $('#optTF').hidden=!['TF','AUTO'].includes(k);
-  render();
+  if(re)reparse();else render();
 }
 
 /* ---------- samples ---------- */
@@ -1184,9 +1324,23 @@ const SAMPLES={
   SORT:['1. เรียงลำดับขั้นตอนการปลูกต้นไม้ให้ถูกต้อง','  ก. ขุดหลุมปลูก','  ข. วางต้นกล้าลงในหลุม','  ค. กลบดิน','  ง. รดน้ำ','2. เรียงลำดับวัฏจักรของน้ำ','  ก. การควบแน่นเป็นเมฆ','  ข. การระเหยของน้ำ','  ค. ฝนตก','ตอบ ข, ก, ค'],
   ESSAY:['1. อธิบายความแตกต่างระหว่างฮาร์ดแวร์และซอฟต์แวร์','2. เมืองหลวงของประเทศญี่ปุ่นคือเมืองใด','ตอบ: โตเกียว / Tokyo','3. 15 × 6 มีค่าเท่าใด','ตอบ: 90'],
   QUESTIONSET:['1. ตอบคำถามต่อไปนี้เกี่ยวกับระบบสุริยะ','  ก. ดาวเคราะห์ดวงใดอยู่ใกล้ดวงอาทิตย์มากที่สุด ตอบ: ดาวพุธ','  ข. ดาวเคราะห์ที่มีวงแหวนเด่นชัดที่สุดคือดาวอะไร ตอบ: ดาวเสาร์','  ค. ระบบสุริยะมีดาวเคราะห์กี่ดวง ตอบ: 8','  ง. อธิบายว่าทำไมโลกจึงมีกลางวันและกลางคืน'],
+  SCENARIO:['ข้อสอบจำลองใบอนุญาตประกอบวิชาชีพทันตกรรม',
+    'Stem 1: เด็กชายอายุ 6 ปี น้ำหนักเกินเกณฑ์ มีฟันผุหลายซี่ ผู้ปกครองให้ดื่มน้ำหวานและนมเปรี้ยวทุกวันก่อนนอน',
+    '1. ปัจจัยใดสัมพันธ์กับภาวะน้ำหนักเกินของเด็กรายนี้มากที่สุด','  [[a. การได้รับน้ำตาลจากเครื่องดื่มเป็นประจำ]]','  b. การแปรงฟันวันละครั้ง','  c. การใช้ยาสีฟันผสมฟลูออไรด์','  d. หมู่เลือดของเด็ก','  e. การเข้านอนเร็ว',
+    '2. เชื้อจุลินทรีย์ใดมีบทบาทหลักในการเริ่มต้นของโรคฟันผุ','  [[a. Streptococcus mutans]]','  b. Porphyromonas gingivalis','  c. Candida albicans','  d. Treponema denticola','  e. Aggregatibacter actinomycetemcomitans',
+    '3. คำแนะนำใดเหมาะสมที่สุดสำหรับผู้ปกครอง','  [[a. งดเครื่องดื่มรสหวานก่อนนอน และแปรงฟันด้วยยาสีฟันผสมฟลูออไรด์]]','  b. ให้ดื่มน้ำหวานหลังแปรงฟันแทน','  c. เปลี่ยนเป็นน้ำผลไม้ทุกมื้อ','  d. บ้วนปากด้วยน้ำเปล่าแทนการแปรงฟัน','  e. รอให้ฟันแท้ขึ้นก่อนค่อยดูแล',
+    'Stem 2: ผู้ป่วยหญิงอายุ 45 ปี มาด้วยเหงือกบวมแดงและมีเลือดออกขณะแปรงฟัน',
+    'ประวัติ: เป็นเบาหวานชนิดที่ 2 ควบคุมระดับน้ำตาลได้ไม่ดี ตรวจพบร่องลึกปริทันต์ 5–6 มม. หลายตำแหน่ง',
+    '4. การวินิจฉัยที่เหมาะสมที่สุดคือข้อใด','  a. เหงือกอักเสบจากคราบจุลินทรีย์','  [[b. โรคปริทันต์อักเสบ]]','  c. เหงือกโตจากยา','  d. แผลร้อนใน','  e. มะเร็งช่องปาก',
+    '5. ปัจจัยเสี่ยงทางระบบที่สำคัญที่สุดของผู้ป่วยรายนี้','  a. ความดันโลหิตต่ำ','  b. โลหิตจางจากการขาดธาตุเหล็ก','  [[c. เบาหวานที่ควบคุมได้ไม่ดี]]','  d. ไมเกรน','  e. ภูมิแพ้อากาศ',
+    '6. การรักษาขั้นแรกที่เหมาะสม','  a. ถอนฟันทุกซี่ที่มีร่องลึกปริทันต์','  b. ผ่าตัดเหงือกทันที','  c. ให้ยาปฏิชีวนะเพียงอย่างเดียว','  [[d. ขูดหินน้ำลายและเกลารากฟัน ร่วมกับสอนทำความสะอาดช่องปาก]]','  e. ใส่ฟันเทียมทั้งปาก',
+    'Stem 3: ผู้ป่วยชายอายุ 30 ปี ปวดฟันกรามล่างขวาตอนกลางคืน ปวดตุบ ๆ ร้าวไปหู ทานยาแก้ปวดไม่หาย ตรวจพบฟันผุลึกใกล้โพรงประสาท ทดสอบความเย็นแล้วปวดค้างนาน',
+    '7. การวินิจฉัยโพรงประสาทฟันที่เหมาะสม','  a. Reversible pulpitis','  [[b. Symptomatic irreversible pulpitis]]','  c. Normal pulp','  d. Pulp necrosis','  e. Previously treated',
+    '8. ภาพรังสีที่เหมาะสมที่สุดสำหรับประเมินบริเวณปลายรากฟัน','  [[a. Periapical radiograph]]','  b. Bitewing radiograph','  c. Occlusal radiograph','  d. Lateral cephalometric radiograph','  e. PA skull',
+    '9. การรักษาที่เหมาะสมเพื่อเก็บรักษาฟันซี่นี้','  a. อุดชั่วคราวแล้วนัดดูอาการ 6 เดือน','  b. ให้ยาปฏิชีวนะเพียงอย่างเดียว','  [[c. รักษาคลองรากฟัน]]','  d. ขูดหินน้ำลาย','  e. เคลือบหลุมร่องฟัน'],
   DRAWING:['1. จงวาดภาพวงจรชีวิตของผีเสื้อ','2. จงวาดและระบุส่วนประกอบของเซลล์พืช','ตอบ: นิวเคลียส','ตอบ: ผนังเซลล์','ตอบ: คลอโรพลาสต์']
 };
-const SDESC={MCHOICE:'ตัวเลือกบรรทัดละข้อ คั่นด้วย Tab หรือใช้ 1) 2) ก็ได้',MCHECK:'ทำเฉลยไว้มากกว่าหนึ่งตัวเลือก',TF:'ข้อความเดี่ยว หรือข้อความย่อยใต้ข้อเดียวกัน',SORT:'เรียงตามลำดับที่ถูก หรือบอกลำดับในบรรทัด ตอบ',ESSAY:'บรรทัด ตอบ: คือคำตอบที่ยอมรับ',QUESTIONSET:'คำถามย่อยต่อท้ายด้วย ตอบ:',DRAWING:'คีย์เวิร์ดช่วยตรวจไม่บังคับ'};
+const SDESC={MCHOICE:'ตัวเลือกบรรทัดละข้อ คั่นด้วย Tab หรือใช้ 1) 2) ก็ได้',MCHECK:'ทำเฉลยไว้มากกว่าหนึ่งตัวเลือก',TF:'ข้อความเดี่ยว หรือข้อความย่อยใต้ข้อเดียวกัน',SORT:'เรียงตามลำดับที่ถูก หรือบอกลำดับในบรรทัด ตอบ',ESSAY:'บรรทัด ตอบ: คือคำตอบที่ยอมรับ',QUESTIONSET:'คำถามย่อยต่อท้ายด้วย ตอบ:',DRAWING:'คีย์เวิร์ดช่วยตรวจไม่บังคับ',SCENARIO:'ขึ้นต้น stem ด้วย Stem 1: แล้วตามด้วย lead-in'};
 async function sampleDocx(lines){
   const body=lines.map(l=>{
     const ind=/^ {2}/.test(l),s=l.replace(/^ +/,'');let runs='';
@@ -1198,8 +1352,8 @@ async function sampleDocx(lines){
 }
 function renderSamples(){
   $('#samples').innerHTML=TYPES.filter(t=>t.k!=='AUTO').map(t=>{
-    const mini=SAMPLES[t.k].filter(l=>!/^แบบทดสอบ/.test(l)).slice(0,6).map(l=>{const ind=/^ {2}/.test(l);const h=esc(l.trim()).replace(/\t/g,'   ').replace(/\[\[(.*?)\]\]/g,'<mark>$1</mark>');return`<div${ind?' class="in"':''}>${h}</div>`}).join('');
-    return`<article class="scard"><header><b>${t.th}</b><small>#${t.k}  ${SDESC[t.k]}</small></header><div class="mini">${mini}</div><footer><button class="btn ghost sm" data-act="sdl" data-k="${t.k}">ดาวน์โหลด .docx</button><button class="btn primary sm" data-act="stry" data-k="${t.k}">ลองแปลง</button></footer></article>`;
+    const mini=SAMPLES[t.k].filter(l=>!/^(แบบทดสอบ|ข้อสอบจำลอง)/.test(l)).slice(0,6).map(l=>{const ind=/^ {2}/.test(l);const h=esc(l.trim()).replace(/\t/g,'   ').replace(/\[\[(.*?)\]\]/g,'<mark>$1</mark>');return`<div${ind?' class="in"':''}>${h}</div>`}).join('');
+    return`<article class="scard"><header><b>${t.th}</b><small>#${t.k}  ${SDESC[t.k]}</small></header><div class="mini">${mini}</div><footer><button class="btn ghost sm" data-act="sdl" data-k="${t.k}">ดาวน์โหลด .docx</button><button class="btn primary sm" data-act="stry" data-k="${t.k}">ลองแปลง</button>${t.k==='SCENARIO'?'<button class="btn ghost sm" data-act="guide">ขั้นตอน</button>':''}</footer></article>`;
   }).join('');
 }
 async function trySample(k){
@@ -1212,7 +1366,7 @@ async function trySample(k){
 
 /* ---------- events ---------- */
 function init(){
-  $('#types').innerHTML=TYPES.map(t=>`<button class="type${t.k==='AUTO'?' auto':''}" role="radio" aria-checked="false" data-k="${t.k}"><b>${t.th}</b><small>${t.k==='AUTO'?'แยกไฟล์ให้อัตโนมัติ':'#'+t.k}</small></button>`).join('');
+  $('#types').innerHTML=TYPES.map(t=>`<button class="type${t.k==='AUTO'?' auto':''}" role="radio" aria-checked="false" data-k="${t.k}"><b>${t.th}</b><small>${t.k==='AUTO'?'แยกไฟล์ให้อัตโนมัติ':t.k==='SCENARIO'?'แยกไฟล์ละ stem':'#'+t.k}</small></button>`).join('');
   $('#types').addEventListener('click',e=>{const b=e.target.closest('.type');if(b)setType(b.dataset.k)});
   const MK=[['b','ตัวหนา','sw-b','B'],['color','สีตัวอักษร','sw-c','A'],['hl','ไฮไลต์','sw-h',''],['u','ขีดเส้นใต้','sw-u','U']];
   $('#marks').innerHTML=MK.map(([k,l,c,g])=>`<button class="chip" data-m="${k}" aria-pressed="${S.opts.marks[k]}"><span class="sw ${c}">${g}</span>${l}</button>`).join('');
@@ -1256,6 +1410,14 @@ function onClick(e){
   if(act==='sdl'){sampleDocx(SAMPLES[el.dataset.k]).then(b=>saveBlob(`ตัวอย่าง_${el.dataset.k}.docx`,b));return}
   if(act==='rmfile'){S.files.splice(+el.dataset.i,1);S.files.forEach((f,i)=>{f.lines.forEach(l=>{l.fi=i;l.segs.forEach(s=>{if(s.img)s.img.fi=i});if(l.table)l.table.fi=i})});renderFiles();reparse();return}
   if(act==='only'){S.only=!S.only;render();return}
+  if(act==='guide'){const d=$('#scnGuide');if(d.showModal)d.showModal();else d.setAttribute('open','');return}
+  if(act==='gclose'){$('#scnGuide').close();return}
+  const sb=el.closest('.stem-block');
+  if(sb){const st=S.stems.find(x=>x.id==sb.dataset.s);if(!st)return;
+    if(act==='stcopy'){copyText(stemPlain(st)).then(ok=>toast(!ok?'คัดลอกไม่ได้ ใช้ไฟล์ 00_รายการ_Stem แทน':stemHasImg(st)?`คัดลอก Stem ${pad3(st.idx)} แล้ว รูปและตารางให้ก๊อปจากไฟล์รายการ Stem`:`คัดลอก Stem ${pad3(st.idx)} แล้ว`));return}
+    if(act==='stdl'){makeDocx('MCHOICE',buildEntries('MCHOICE',stemQs(st),stemTag(st))).then(b=>saveBlob(stemFile(st),b));return}
+    if(act==='stdone'){if(el.checked)S.done.add(st.idx);else S.done.delete(st.idx);saveDone();sb.classList.toggle('isdone',el.checked);renderBar();return}
+  }
   const card=el.closest('.q');if(!card)return;const q=S.qs.find(x=>x.id==card.dataset.q);if(!q)return;const t=eType(q);
   if(act==='del'){S.qs.splice(S.qs.indexOf(q),1);render();toast('ลบข้อแล้ว');return}
   if(act==='pick'){
